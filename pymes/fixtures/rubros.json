@@ -1,0 +1,79 @@
+[
+    {
+        "model": "pymes.rubro",
+        "pk": 1,
+        "fields": {
+            "nombre": "Comercio al por menor"
+        }
+    },
+    {
+        "model": "pymes.rubro",
+        "pk": 2,
+        "fields": {
+            "nombre": "Alimentos y gastronomía"
+        }
+    },
+    {
+        "model": "pymes.rubro",
+        "pk": 3,
+        "fields": {
+            "nombre": "Servicios profesionales"
+        }
+    },
+    {
+        "model": "pymes.rubro",
+        "pk": 4,
+        "fields": {
+            "nombre": "Construcción"
+        }
+    },
+    {
+        "model": "pymes.rubro",
+        "pk": 5,
+        "fields": {
+            "nombre": "Turismo y hotelería"
+        }
+    },
+    {
+        "model": "pymes.rubro",
+        "pk": 6,
+        "fields": {
+            "nombre": "Agricultura y agroindustria"
+        }
+    },
+    {
+        "model": "pymes.rubro",
+        "pk": 7,
+        "fields": {
+            "nombre": "Transporte y logística"
+        }
+    },
+    {
+        "model": "pymes.rubro",
+        "pk": 8,
+        "fields": {
+            "nombre": "Tecnología y software"
+        }
+    },
+    {
+        "model": "pymes.rubro",
+        "pk": 9,
+        "fields": {
+            "nombre": "Educación y capacitación"
+        }
+    },
+    {
+        "model": "pymes.rubro",
+        "pk": 10,
+        "fields": {
+            "nombre": "Salud y bienestar"
+        }
+    },
+    {
+        "model": "pymes.rubro",
+        "pk": 11,
+        "fields": {
+            "nombre": "Manufactura y artesanía"
+        }
+    }
+]

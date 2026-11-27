@@ -1,0 +1,114 @@
+{% extends "base.html" %}
+{% block title %}Mi Panel · Red Pymes{% endblock %}
+
+{% block content %}
+  <div class="hero-light">
+    <div style="display:flex; flex-wrap:wrap; justify-content:space-between; align-items:center; gap:1rem;">
+      <div>
+        <h1>Panel de Usuario: {{ user.username }}</h1>
+        <p class="muted" style="margin:0;">
+          Tipo de cuenta:
+          {% if user.is_superuser %}<strong>Superusuario</strong>
+          {% elif user.is_staff %}<strong>Staff</strong>
+          {% else %}<strong>Usuario normal</strong>{% endif %}
+          {% if user.cargo %} · Cargo: {{ user.cargo }}{% endif %}
+          {% if user.telefono %} · Tel: {{ user.telefono }}{% endif %}
+        </p>
+      </div>
+      {% if pyme %}
+        <span class="badge">{{ pyme.get_tamano_display }}</span>
+      {% endif %}
+    </div>
+  </div>
+
+  <div class="grid" style="grid-template-columns: repeat(auto-fit, minmax(340px, 1fr)); align-items: start;">
+    <section class="form-box">
+      <h2>{% if pyme %}1. Datos de mi Pyme{% else %}1. Registrar mi Pyme{% endif %}</h2>
+      <p class="muted" style="font-size: 0.9rem;">
+        {% if pyme %}
+          Actualiza la información comercial de <strong>{{ pyme.razon_social }}</strong>.
+        {% else %}
+          Completa los datos de tu empresa para vincularla a tu usuario y habilitar la carga de productos.
+        {% endif %}
+      </p>
+      <form method="post" action="{% url 'portal_usuario' %}">
+        {% csrf_token %}
+        <input type="hidden" name="accion" value="guardar_pyme">
+        {{ pyme_form.as_p }}
+        <button type="submit" class="btn">Guardar datos de la Pyme</button>
+      </form>
+    </section>
+
+    <section class="form-box">
+      <h2>2. Agregar Producto o Servicio</h2>
+      {% if pyme %}
+        <p class="muted" style="font-size: 0.9rem;">
+          Publica un nuevo producto en el catálogo de <strong>{{ pyme.nombre_fantasia|default:pyme.razon_social }}</strong>.
+        </p>
+        <form method="post" action="{% url 'portal_usuario' %}">
+          {% csrf_token %}
+          <input type="hidden" name="accion" value="crear_producto">
+          {{ producto_form.as_p }}
+          <button type="submit" class="btn">Agregar producto</button>
+        </form>
+      {% else %}
+        <p class="muted">
+          Primero guarda los datos de tu pyme en el formulario de la izquierda para poder agregar productos.
+        </p>
+      {% endif %}
+    </section>
+  </div>
+
+  {% if pyme %}
+    <section style="margin-top: 2.2rem;">
+      <div class="section-head">
+        <h2>Mis Productos ({{ productos.count }})</h2>
+      </div>
+      <div class="table-wrap">
+        <table>
+          <thead>
+            <tr>
+              <th>SKU</th>
+              <th>Producto / Servicio</th>
+              <th>Precio (CLP)</th>
+              <th>Stock</th>
+              <th>Estado</th>
+              <th>Acciones</th>
+            </tr>
+          </thead>
+          <tbody>
+            {% for prod in productos %}
+              <tr>
+                <td><strong>{{ prod.sku }}</strong></td>
+                <td>
+                  {{ prod.nombre }}
+                  {% if prod.descripcion %}<div class="muted" style="font-size:0.82rem;">{{ prod.descripcion|truncatewords:12 }}</div>{% endif %}
+                </td>
+                <td>${{ prod.precio }}</td>
+                <td>{{ prod.stock }}</td>
+                <td>
+                  {% if prod.activo %}
+                    <span class="badge">Activo</span>
+                  {% else %}
+                    <span class="badge badge-gray">Inactivo</span>
+                  {% endif %}
+                </td>
+                <td style="white-space: nowrap;">
+                  <a href="{% url 'editar_producto' prod.id %}" class="btn btn-secondary btn-sm">Editar</a>
+                  <form method="post" action="{% url 'eliminar_producto' prod.id %}" style="display:inline;" onsubmit="return confirm('¿Eliminar este producto?');">
+                    {% csrf_token %}
+                    <button type="submit" class="btn btn-danger btn-sm">Eliminar</button>
+                  </form>
+                </td>
+              </tr>
+            {% empty %}
+              <tr>
+                <td colspan="6" class="muted">Aún no has agregado productos a tu pyme.</td>
+              </tr>
+            {% endfor %}
+          </tbody>
+        </table>
+      </div>
+    </section>
+  {% endif %}
+{% endblock %}

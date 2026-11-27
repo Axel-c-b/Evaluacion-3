@@ -1,0 +1,92 @@
+{% extends "base.html" %}
+{% block title %}Inicio · Red Pymes{% endblock %}
+
+{% block content %}
+  <section class="hero">
+    <h1>Impulsa y gestiona tu Pyme en un solo lugar</h1>
+    <p>Explora empresas registradas por rubro y comuna, revisa su catálogo de productos o entra con tu cuenta de usuario para administrar tu negocio.</p>
+    <div class="hero-actions">
+      <a class="btn btn-white" href="{% url 'catalogo_pymes' %}">Explorar Pymes</a>
+      <a class="btn btn-outline-white" href="{% url 'catalogo_productos' %}">Ver Productos</a>
+      {% if user.is_authenticated %}
+        <a class="btn btn-outline-white" href="{% url 'portal_usuario' %}">Ir a mi panel</a>
+      {% else %}
+        <a class="btn btn-outline-white" href="{% url 'login' %}">Acceso usuarios</a>
+      {% endif %}
+    </div>
+  </section>
+
+  <section class="stats-grid">
+    <div class="stat-card">
+      <div class="stat-value">{{ total_pymes }}</div>
+      <div class="stat-label">Pymes activas registradas</div>
+    </div>
+    <div class="stat-card">
+      <div class="stat-value">{{ total_productos }}</div>
+      <div class="stat-label">Productos y servicios publicados</div>
+    </div>
+    <div class="stat-card">
+      <div class="stat-value">{{ total_rubros }}</div>
+      <div class="stat-label">Rubros disponibles</div>
+    </div>
+  </section>
+
+  <div class="section-head">
+    <h2>Pymes destacadas</h2>
+    <a href="{% url 'catalogo_pymes' %}" class="btn btn-secondary btn-sm">Ver todas →</a>
+  </div>
+
+  <section class="grid" style="margin-bottom: 2.5rem;">
+    {% for pyme in pymes_destacadas %}
+      <article class="card">
+        <div>
+          <span class="badge">{{ pyme.get_tamano_display }}</span>
+          <h3>{{ pyme.nombre_fantasia|default:pyme.razon_social }}</h3>
+          <div class="card-meta">
+            {{ pyme.rubro.nombre }} · {{ pyme.comuna.nombre }}, {{ pyme.comuna.region.nombre }}
+          </div>
+          <p class="muted" style="font-size: 0.9rem;">
+            RUT: {{ pyme.rut }}<br>
+            Contacto: {{ pyme.email }}
+          </p>
+        </div>
+        <div class="card-footer">
+          <span class="muted">{{ pyme.productos.count }} producto(s)</span>
+          <a href="{% url 'catalogo_productos' %}?pyme={{ pyme.id }}" class="btn btn-secondary btn-sm">Ver productos</a>
+        </div>
+      </article>
+    {% empty %}
+      <div class="card">
+        <h3>Aún no hay pymes registradas</h3>
+        <p class="muted">Inicia sesión con tu usuario y crea la primera pyme desde "Mi panel".</p>
+      </div>
+    {% endfor %}
+  </section>
+
+  <div class="section-head">
+    <h2>Productos recientes</h2>
+    <a href="{% url 'catalogo_productos' %}" class="btn btn-secondary btn-sm">Ver catálogo →</a>
+  </div>
+
+  <section class="grid">
+    {% for prod in productos_destacados %}
+      <article class="card">
+        <div>
+          <span class="badge badge-blue">SKU {{ prod.sku }}</span>
+          <h3>{{ prod.nombre }}</h3>
+          <div class="card-meta">{{ prod.pyme.nombre_fantasia|default:prod.pyme.razon_social }}</div>
+          <p class="muted" style="font-size: 0.9rem;">{{ prod.descripcion|default:"Sin descripción."|truncatewords:18 }}</p>
+        </div>
+        <div class="card-footer">
+          <span class="price-tag">${{ prod.precio }}</span>
+          <span class="badge badge-gray">Stock: {{ prod.stock }}</span>
+        </div>
+      </article>
+    {% empty %}
+      <div class="card">
+        <h3>Sin productos publicados</h3>
+        <p class="muted">Cuando registres una pyme podrás agregar sus productos aquí.</p>
+      </div>
+    {% endfor %}
+  </section>
+{% endblock %}

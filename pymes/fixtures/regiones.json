@@ -1,0 +1,114 @@
+[
+    {
+        "model": "pymes.region",
+        "pk": 1,
+        "fields": {
+            "nombre": "Tarapacá"
+        }
+    },
+    {
+        "model": "pymes.region",
+        "pk": 2,
+        "fields": {
+            "nombre": "Antofagasta"
+        }
+    },
+    {
+        "model": "pymes.region",
+        "pk": 3,
+        "fields": {
+            "nombre": "Atacama"
+        }
+    },
+    {
+        "model": "pymes.region",
+        "pk": 4,
+        "fields": {
+            "nombre": "Coquimbo"
+        }
+    },
+    {
+        "model": "pymes.region",
+        "pk": 5,
+        "fields": {
+            "nombre": "Valparaíso"
+        }
+    },
+    {
+        "model": "pymes.region",
+        "pk": 6,
+        "fields": {
+            "nombre": "Libertador General Bernardo O'Higgins"
+        }
+    },
+    {
+        "model": "pymes.region",
+        "pk": 7,
+        "fields": {
+            "nombre": "Maule"
+        }
+    },
+    {
+        "model": "pymes.region",
+        "pk": 8,
+        "fields": {
+            "nombre": "Biobío"
+        }
+    },
+    {
+        "model": "pymes.region",
+        "pk": 9,
+        "fields": {
+            "nombre": "La Araucanía"
+        }
+    },
+    {
+        "model": "pymes.region",
+        "pk": 10,
+        "fields": {
+            "nombre": "Los Lagos"
+        }
+    },
+    {
+        "model": "pymes.region",
+        "pk": 11,
+        "fields": {
+            "nombre": "Aysén del General Carlos Ibáñez del Campo"
+        }
+    },
+    {
+        "model": "pymes.region",
+        "pk": 12,
+        "fields": {
+            "nombre": "Magallanes y de la Antártica Chilena"
+        }
+    },
+    {
+        "model": "pymes.region",
+        "pk": 13,
+        "fields": {
+            "nombre": "Metropolitana de Santiago"
+        }
+    },
+    {
+        "model": "pymes.region",
+        "pk": 14,
+        "fields": {
+            "nombre": "Los Ríos"
+        }
+    },
+    {
+        "model": "pymes.region",
+        "pk": 15,
+        "fields": {
+            "nombre": "Arica y Parinacota"
+        }
+    },
+    {
+        "model": "pymes.region",
+        "pk": 16,
+        "fields": {
+            "nombre": "Ñuble"
+        }
+    }
+]

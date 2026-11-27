@@ -1,0 +1,57 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>{% block title %}{% block titulo %}Portal Pymes Chile{% endblock %}{% endblock %}</title>
+  <link rel="stylesheet" href="{% static 'css/estilos.css' %}">
+</head>
+<body>
+  <header class="navbar">
+    <div class="navbar-inner">
+      <a class="brand" href="{% url 'bienvenida' %}">
+        <span class="brand-dot"></span>
+        Red Pymes
+      </a>
+      <nav class="nav-links">
+        <a href="{% url 'bienvenida' %}">Inicio</a>
+        <a href="{% url 'catalogo_pymes' %}">Pymes</a>
+        <a href="{% url 'catalogo_productos' %}">Productos</a>
+        <a href="/api/">API</a>
+        {% if user.is_authenticated %}
+          <a href="{% url 'portal_usuario' %}" class="btn-nav">Mi panel ({{ user.username }})</a>
+          {% if user.is_staff %}
+            <a href="/admin/">Admin</a>
+          {% endif %}
+          <form action="{% url 'logout' %}" method="post" style="display:inline;">
+            {% csrf_token %}
+            <button type="submit" class="link-btn">Salir</button>
+          </form>
+        {% else %}
+          <a href="{% url 'registro' %}">Crear cuenta</a>
+          <a href="{% url 'login' %}" class="btn-nav">Iniciar sesión</a>
+        {% endif %}
+      </nav>
+    </div>
+  </header>
+
+  <main class="container">
+    {% if messages %}
+      <ul class="messages">
+        {% for message in messages %}
+          <li class="{{ message.tags }}">{{ message }}</li>
+        {% endfor %}
+      </ul>
+    {% endif %}
+
+    {% block content %}
+      {% block contenido %}{% endblock %}
+    {% endblock %}
+  </main>
+
+  <footer>
+    Portal de Gestión de Pymes y Productos · Django + Django REST Framework
+  </footer>
+</body>
+</html>

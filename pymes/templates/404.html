@@ -1,0 +1,10 @@
+{% extends "base.html" %}
+{% block title %}Página no encontrada · Red Pymes{% endblock %}
+
+{% block content %}
+  <div class="hero-light" style="text-align:center; padding: 3rem 1.5rem;">
+    <h1>Error 404</h1>
+    <p class="muted">La página o recurso que buscas no existe.</p>
+    <a href="{% url 'bienvenida' %}" class="btn" style="margin-top: 1rem;">Volver al inicio</a>
+  </div>
+{% endblock %}

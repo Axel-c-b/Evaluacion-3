@@ -1,0 +1,18 @@
+# Ambiente virtual y secretos
+venv/
+.venv/
+*/Scripts/
+.env
+
+# Python
+__pycache__/
+*.pyc
+
+# Django
+staticfiles/
+db.sqlite3
+*.log
+
+# Editor
+.vscode/
+.idea/

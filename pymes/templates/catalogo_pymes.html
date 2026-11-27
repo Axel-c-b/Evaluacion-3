@@ -1,0 +1,56 @@
+{% extends "base.html" %}
+{% block title %}Directorio de Pymes · Red Pymes{% endblock %}
+
+{% block content %}
+  <div class="hero-light">
+    <h1>Directorio de Pymes</h1>
+    <p class="muted">Filtra por nombre, RUT, comuna, rubro o tamaño de empresa.</p>
+  </div>
+
+  <form method="get" class="filter-bar">
+    <input type="text" name="q" value="{{ q }}" placeholder="Buscar por nombre, RUT o comuna...">
+    <select name="rubro">
+      <option value="">Todos los rubros</option>
+      {% for r in rubros %}
+        <option value="{{ r.id }}" {% if rubro_sel == r.id|stringformat:"s" %}selected{% endif %}>{{ r.nombre }}</option>
+      {% endfor %}
+    </select>
+    <select name="tamano">
+      <option value="">Todos los tamaños</option>
+      {% for code, label in tamanos %}
+        <option value="{{ code }}" {% if tamano_sel == code %}selected{% endif %}>{{ label }}</option>
+      {% endfor %}
+    </select>
+    <button type="submit" class="btn">Filtrar</button>
+    {% if q or rubro_sel or tamano_sel %}
+      <a href="{% url 'catalogo_pymes' %}" class="btn btn-secondary">Limpiar</a>
+    {% endif %}
+  </form>
+
+  <section class="grid">
+    {% for pyme in pymes %}
+      <article class="card">
+        <div>
+          <span class="badge">{{ pyme.get_tamano_display }}</span>
+          <h3>{{ pyme.nombre_fantasia|default:pyme.razon_social }}</h3>
+          <div class="card-meta">{{ pyme.razon_social }} · RUT {{ pyme.rut }}</div>
+          <p class="muted" style="font-size: 0.9rem;">
+            <strong>Rubro:</strong> {{ pyme.rubro.nombre }}<br>
+            <strong>Ubicación:</strong> {{ pyme.comuna.nombre }}, {{ pyme.comuna.region.nombre }}<br>
+            {% if pyme.direccion %}<strong>Dirección:</strong> {{ pyme.direccion }}<br>{% endif %}
+            <strong>Trabajadores:</strong> {{ pyme.num_trabajadores }}
+          </p>
+        </div>
+        <div class="card-footer">
+          <span class="muted">{{ pyme.email }}</span>
+          <a href="{% url 'catalogo_productos' %}?pyme={{ pyme.id }}" class="btn btn-sm">Productos ({{ pyme.productos.count }})</a>
+        </div>
+      </article>
+    {% empty %}
+      <div class="card">
+        <h3>No se encontraron pymes</h3>
+        <p class="muted">Prueba cambiando los filtros de búsqueda o registra una nueva desde tu panel.</p>
+      </div>
+    {% endfor %}
+  </section>
+{% endblock %}

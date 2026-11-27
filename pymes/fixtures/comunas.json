@@ -1,0 +1,114 @@
+[
+    {
+        "model": "pymes.comuna",
+        "pk": 1,
+        "fields": {
+            "region": 9,
+            "nombre": "Temuco"
+        }
+    },
+    {
+        "model": "pymes.comuna",
+        "pk": 2,
+        "fields": {
+            "region": 9,
+            "nombre": "Padre Las Casas"
+        }
+    },
+    {
+        "model": "pymes.comuna",
+        "pk": 3,
+        "fields": {
+            "region": 9,
+            "nombre": "Villarrica"
+        }
+    },
+    {
+        "model": "pymes.comuna",
+        "pk": 4,
+        "fields": {
+            "region": 9,
+            "nombre": "Pucón"
+        }
+    },
+    {
+        "model": "pymes.comuna",
+        "pk": 5,
+        "fields": {
+            "region": 9,
+            "nombre": "Angol"
+        }
+    },
+    {
+        "model": "pymes.comuna",
+        "pk": 6,
+        "fields": {
+            "region": 9,
+            "nombre": "Lautaro"
+        }
+    },
+    {
+        "model": "pymes.comuna",
+        "pk": 7,
+        "fields": {
+            "region": 9,
+            "nombre": "Nueva Imperial"
+        }
+    },
+    {
+        "model": "pymes.comuna",
+        "pk": 8,
+        "fields": {
+            "region": 9,
+            "nombre": "Victoria"
+        }
+    },
+    {
+        "model": "pymes.comuna",
+        "pk": 9,
+        "fields": {
+            "region": 13,
+            "nombre": "Santiago"
+        }
+    },
+    {
+        "model": "pymes.comuna",
+        "pk": 10,
+        "fields": {
+            "region": 13,
+            "nombre": "Providencia"
+        }
+    },
+    {
+        "model": "pymes.comuna",
+        "pk": 11,
+        "fields": {
+            "region": 5,
+            "nombre": "Valparaíso"
+        }
+    },
+    {
+        "model": "pymes.comuna",
+        "pk": 12,
+        "fields": {
+            "region": 5,
+            "nombre": "Viña del Mar"
+        }
+    },
+    {
+        "model": "pymes.comuna",
+        "pk": 13,
+        "fields": {
+            "region": 8,
+            "nombre": "Concepción"
+        }
+    },
+    {
+        "model": "pymes.comuna",
+        "pk": 14,
+        "fields": {
+            "region": 10,
+            "nombre": "Puerto Montt"
+        }
+    }
+]

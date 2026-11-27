@@ -1,0 +1,16 @@
+{% extends "base.html" %}
+{% block title %}Editar Producto · Red Pymes{% endblock %}
+
+{% block content %}
+  <div class="form-box form-box-narrow">
+    <h2>Editar producto: {{ producto.nombre }}</h2>
+    <form method="post">
+      {% csrf_token %}
+      {{ form.as_p }}
+      <div style="display:flex; gap:0.75rem;">
+        <button type="submit" class="btn">Guardar cambios</button>
+        <a href="{% url 'portal_usuario' %}" class="btn btn-secondary">Cancelar</a>
+      </div>
+    </form>
+  </div>
+{% endblock %}

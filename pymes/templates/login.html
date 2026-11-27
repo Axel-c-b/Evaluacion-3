@@ -1,0 +1,17 @@
+{% extends "base.html" %}
+{% block title %}Iniciar sesión · Red Pymes{% endblock %}
+
+{% block content %}
+  <div class="form-box form-box-narrow">
+    <h2>Iniciar sesión</h2>
+    <p class="muted">Ingresa con tu cuenta de usuario para administrar tu pyme y agregar productos.</p>
+    <form method="post">
+      {% csrf_token %}
+      {{ form.as_p }}
+      <button type="submit" class="btn" style="width: 100%;">Entrar a mi panel</button>
+    </form>
+    <p class="muted" style="margin-top: 1.2rem; text-align: center; font-size: 0.9rem;">
+      ¿No tienes cuenta? <a href="{% url 'registro' %}">Regístrate aquí</a>
+    </p>
+  </div>
+{% endblock %}

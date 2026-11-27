@@ -1,0 +1,47 @@
+{% extends "base.html" %}
+{% block title %}Catálogo de Productos · Red Pymes{% endblock %}
+
+{% block content %}
+  <div class="hero-light">
+    <h1>Productos y Servicios</h1>
+    <p class="muted">Explora la oferta publicada por las pymes registradas.</p>
+  </div>
+
+  <form method="get" class="filter-bar">
+    <input type="text" name="q" value="{{ q }}" placeholder="Buscar por nombre, SKU o descripción...">
+    <select name="pyme">
+      <option value="">Todas las pymes</option>
+      {% for p in pymes %}
+        <option value="{{ p.id }}" {% if pyme_sel == p.id|stringformat:"s" %}selected{% endif %}>{{ p.nombre_fantasia|default:p.razon_social }}</option>
+      {% endfor %}
+    </select>
+    <button type="submit" class="btn">Buscar</button>
+    {% if q or pyme_sel %}
+      <a href="{% url 'catalogo_productos' %}" class="btn btn-secondary">Limpiar</a>
+    {% endif %}
+  </form>
+
+  <section class="grid">
+    {% for prod in productos %}
+      <article class="card">
+        <div>
+          <span class="badge badge-blue">SKU: {{ prod.sku }}</span>
+          <h3>{{ prod.nombre }}</h3>
+          <div class="card-meta">{{ prod.pyme.nombre_fantasia|default:prod.pyme.razon_social }}</div>
+          <p class="muted" style="font-size: 0.9rem;">{{ prod.descripcion|default:"Sin descripción adicional." }}</p>
+        </div>
+        <div class="card-footer">
+          <span class="price-tag">${{ prod.precio }} CLP</span>
+          <span class="badge {% if prod.stock > 0 %}badge-gray{% else %}badge-danger{% endif %}">
+            Stock: {{ prod.stock }}
+          </span>
+        </div>
+      </article>
+    {% empty %}
+      <div class="card">
+        <h3>No hay productos disponibles</h3>
+        <p class="muted">No se encontraron productos con los filtros seleccionados.</p>
+      </div>
+    {% endfor %}
+  </section>
+{% endblock %}
